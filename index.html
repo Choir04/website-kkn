@@ -544,7 +544,7 @@
     isExhibitMode = !isExhibitMode;
     if(isExhibitMode) {
       document.body.classList.add('exhibition-active');
-      btnExhibit.innerHTML = '❌ KELUAR MODE PAMERAN';
+      btnExhibit.innerHTML = 'KELUAR DEMO SIMULASI';
       if(document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen().catch(err => console.log(err));
       }
