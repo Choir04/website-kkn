@@ -1,575 +1,2459 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panduan Pemakain Lampu Otomatis</title>
+
+<title>Panduan Pemakaian Lampu Otomatis</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --night:#1B2A41;
-    --night-2:#233855;
-    --amber:#E8A33D;
-    --amber-soft:#F3C878;
-    --clay:#B6603C;
-    --clay-soft:#D98A5F;
-    --sand:#F1ECDD;
-    --sand-2:#E7E0CC;
-    --ink:#24211D;
-    --ink-soft:#5B564B;
-    --moss:#5F8362;
-    --moss-soft:#89AB8C;
-    --white:#FFFCF6;
-    --line: rgba(36,33,29,0.14);
-    --radius: 6px;
-    --shadow-soft: 0 14px 30px -18px rgba(27,42,65,0.35);
-    --shadow-lift: 0 22px 40px -18px rgba(27,42,65,0.28);
-    --energy: #4ADE80;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'IBM Plex Sans', sans-serif;
-    background-color:var(--sand);
-    background-image: radial-gradient(circle at 1px 1px, rgba(36,33,29,0.06) 1px, transparent 1.6px);
-    background-size:22px 22px;
-    color:var(--ink);
-    line-height:1.55;
-  }
-  h1,h2,h3,h4{font-family:'Fraunces', serif;font-weight:600;color:var(--night);}
-  a{color:inherit; text-decoration: none;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
 
-  /* ---------- NAV ---------- */
-  nav.topnav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(241,236,221,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
-    transition: transform 0.3s ease;
-  }
-  .topnav .wrap{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px 28px;gap:20px;
-  }
-  .brand{
-    font-family:'Fraunces',serif;font-weight:600;font-size:18px;color:var(--night);
-    display:flex;align-items:center;gap:9px;white-space:nowrap;
-  }
-  .brand .dot{
-    width:11px;height:11px;border-radius:50%;display:inline-block;
-    background:radial-gradient(circle at 35% 30%, var(--amber-soft), var(--amber) 70%);
-    box-shadow:0 0 0 3px rgba(232,163,61,0.18);
-  }
-  .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;}
-  .tabs::-webkit-scrollbar{display:none;}
-  .tabs a{
-    position:relative;font-size:14.5px;padding:8px 14px;border-radius:999px;
-    color:var(--ink-soft);white-space:nowrap;transition:background .25s, color .25s;
-  }
-  .tabs a.active, .tabs a:hover{background:var(--night);color:var(--white);}
+:root {
+  --night:#1B2A41;
+  --night-2:#233855;
+  --amber:#E8A33D;
+  --amber-soft:#F3C878;
+  --clay:#B6603C;
+  --clay-soft:#D98A5F;
+  --sand:#F1ECDD;
+  --sand-2:#E7E0CC;
+  --ink:#24211D;
+  --ink-soft:#5B564B;
+  --moss:#5F8362;
+  --moss-soft:#89AB8C;
+  --white:#FFFCF6;
+  --line:rgba(36,33,29,0.14);
+  --radius:6px;
+  --shadow-soft:0 14px 30px -18px rgba(27,42,65,0.35);
+  --shadow-lift:0 22px 40px -18px rgba(27,42,65,0.28);
+  --energy:#4ADE80;
+}
 
-  /* ---------- HERO ---------- */
-  header.hero{
-    background:linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
-    color:var(--white); padding:64px 0 0; overflow:hidden; position:relative;
-  }
-  .hero-wave{display:block;width:100%;height:auto;margin-top:36px;}
-  .hero .wrap{
-    display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;
-    padding-bottom:40px;position:relative;z-index:1;
-  }
-  .hero-label{font-size:14px;color:var(--amber-soft);margin-bottom:14px;letter-spacing:.2px;}
-  .hero h1{font-size:clamp(32px,4.2vw,50px);color:var(--white);line-height:1.08;margin-bottom:18px;}
-  .hero p.lede{font-size:16.5px;color:#D8D4C6;max-width:480px;margin-bottom:26px;}
-  
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--amber); color: var(--night);
-    padding: 12px 24px; border-radius: 999px; font-weight: 600;
-    font-family: 'IBM Plex Sans', sans-serif; transition: transform 0.2s, background 0.2s;
-    box-shadow: 0 4px 14px rgba(232,163,61,0.4);
-  }
-  .btn-primary:hover { transform: translateY(-2px); background: #f0b555; }
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  /* ---------- SECTION SHELL ---------- */
-  main section{
-    padding:72px 0;
-    scroll-margin-top: 60px;
-  }
-  main section:nth-of-type(even){background:var(--white);}
-  .section-head{margin-bottom:34px;max-width:640px; text-align: center; margin-inline: auto;}
-  .section-head .accent-rule{
-    width:38px;height:4px;border-radius:99px;margin: 0 auto 16px;
-    background:linear-gradient(90deg,var(--amber),var(--clay));
-  }
-  .section-head h2{font-size:clamp(24px,3vw,32px);margin-bottom:10px;}
-  .section-head p{color:var(--ink-soft);font-size:15.5px;}
+html {
+  scroll-behavior:smooth;
+}
 
-  /* ---------- PERMASALAHAN & SOLUSI ---------- */
+body {
+  font-family:'IBM Plex Sans', sans-serif;
+  background-color:var(--sand);
+  background-image:radial-gradient(
+    circle at 1px 1px,
+    rgba(36,33,29,0.06) 1px,
+    transparent 1.6px
+  );
+  background-size:22px 22px;
+  color:var(--ink);
+  line-height:1.55;
+}
+
+h1,h2,h3,h4 {
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  color:var(--night);
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+img,svg {
+  display:block;
+  max-width:100%;
+}
+
+.wrap {
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 28px;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+nav.topnav {
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(241,236,221,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  transition:transform 0.3s ease;
+}
+
+.topnav .wrap {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 28px;
+  gap:20px;
+}
+
+.brand {
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:18px;
+  color:var(--night);
+  display:flex;
+  align-items:center;
+  gap:9px;
+  white-space:nowrap;
+}
+
+.brand .dot {
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  display:inline-block;
+  background:radial-gradient(
+    circle at 35% 30%,
+    var(--amber-soft),
+    var(--amber) 70%
+  );
+  box-shadow:0 0 0 3px rgba(232,163,61,0.18);
+}
+
+.tabs {
+  display:flex;
+  gap:4px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+
+.tabs::-webkit-scrollbar {
+  display:none;
+}
+
+.tabs a {
+  position:relative;
+  font-size:14.5px;
+  padding:8px 14px;
+  border-radius:999px;
+  color:var(--ink-soft);
+  white-space:nowrap;
+  transition:background .25s, color .25s;
+}
+
+.tabs a.active,
+.tabs a:hover {
+  background:var(--night);
+  color:var(--white);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+header.hero {
+  background:linear-gradient(
+    180deg,
+    var(--night) 0%,
+    var(--night-2) 100%
+  );
+  color:var(--white);
+  padding:64px 0 0;
+  overflow:hidden;
+  position:relative;
+}
+
+.hero-wave {
+  display:block;
+  width:100%;
+  height:auto;
+  margin-top:36px;
+}
+
+.hero .wrap {
+  display:grid;
+  grid-template-columns:1.15fr 1fr;
+  gap:40px;
+  align-items:center;
+  padding-bottom:40px;
+  position:relative;
+  z-index:1;
+}
+
+.hero-label {
+  font-size:14px;
+  color:var(--amber-soft);
+  margin-bottom:14px;
+  letter-spacing:.2px;
+}
+
+.hero h1 {
+  font-size:clamp(32px,4.2vw,50px);
+  color:var(--white);
+  line-height:1.08;
+  margin-bottom:18px;
+}
+
+.hero p.lede {
+  font-size:16.5px;
+  color:#D8D4C6;
+  max-width:480px;
+  margin-bottom:26px;
+}
+
+.btn-primary {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--amber);
+  color:var(--night);
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:600;
+  font-family:'IBM Plex Sans',sans-serif;
+  transition:transform 0.2s, background 0.2s;
+  box-shadow:0 4px 14px rgba(232,163,61,0.4);
+}
+
+.btn-primary:hover {
+  transform:translateY(-2px);
+  background:#f0b555;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+main section {
+  padding:72px 0;
+  scroll-margin-top:60px;
+}
+
+main section:nth-of-type(even) {
+  background:var(--white);
+}
+
+.section-head {
+  margin-bottom:34px;
+  max-width:640px;
+  text-align:center;
+  margin-inline:auto;
+}
+
+.section-head .accent-rule {
+  width:38px;
+  height:4px;
+  border-radius:99px;
+  margin:0 auto 16px;
+  background:linear-gradient(
+    90deg,
+    var(--amber),
+    var(--clay)
+  );
+}
+
+.section-head h2 {
+  font-size:clamp(24px,3vw,32px);
+  margin-bottom:10px;
+}
+
+.section-head p {
+  color:var(--ink-soft);
+  font-size:15.5px;
+}
+
+
+/* =====================================================
+   PERMASALAHAN & SOLUSI
+===================================================== */
+
+.prob-sol-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  background:var(--sand-2);
+  border-radius:16px;
+  padding:32px;
+}
+
+.card-ps {
+  background:var(--white);
+  padding:24px;
+  border-radius:12px;
+  box-shadow:var(--shadow-soft);
+}
+
+.card-ps h3 {
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.card-ps p {
+  color:var(--ink-soft);
+  font-size:15px;
+}
+
+
+/* =====================================================
+   SIMULASI DASHBOARD
+===================================================== */
+
+.sim-container {
+  background:var(--night);
+  border-radius:20px;
+  padding:32px;
+  color:var(--white);
+  box-shadow:var(--shadow-lift);
+  position:relative;
+  overflow:hidden;
+}
+
+.sim-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:32px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:16px;
+}
+
+.sim-controls {
+  display:flex;
+  gap:12px;
+  background:rgba(0,0,0,0.3);
+  padding:6px;
+  border-radius:99px;
+}
+
+.sim-btn {
+  background:transparent;
+  border:none;
+  color:#fff;
+  padding:8px 20px;
+  border-radius:99px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.sim-btn.active {
+  background:var(--amber);
+  color:var(--night);
+}
+
+.sim-flow-area {
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:40px 0;
+  max-width:800px;
+  margin:0 auto;
+}
+
+.sim-node {
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  width:140px;
+  text-align:center;
+}
+
+.node-icon {
+  width:80px;
+  height:80px;
+  background:var(--night-2);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:36px;
+  border:3px solid #3A5A55;
+  transition:0.4s;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.node-label {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  color:var(--amber-soft);
+  font-weight:600;
+}
+
+.node-status {
+  font-size:14px;
+  font-weight:bold;
+  background:rgba(255,255,255,0.1);
+  padding:4px 12px;
+  border-radius:6px;
+}
+
+
+/* Panel Surya */
+
+.state-day .node-panel .node-icon {
+  border-color:var(--amber);
+  box-shadow:0 0 25px rgba(232,163,61,0.4);
+}
+
+.state-day .node-panel .node-status {
+  color:var(--amber);
+}
+
+.state-night .node-panel .node-icon {
+  filter:grayscale(1);
+  border-color:#555;
+}
+
+
+/* Lampu */
+
+.state-night .node-lamp .node-icon {
+  border-color:var(--amber);
+  background:#FFF9D2;
+  box-shadow:0 0 40px rgba(232,163,61,0.6);
+}
+
+.state-night .node-lamp .node-status {
+  color:var(--amber);
+}
+
+
+/* Baterai */
+
+.bat-level {
+  width:40px;
+  height:20px;
+  background:#333;
+  border-radius:4px;
+  border:2px solid #fff;
+  position:relative;
+  display:inline-block;
+  margin-top:4px;
+}
+
+.bat-level::after {
+  content:'';
+  position:absolute;
+  right:-4px;
+  top:4px;
+  width:2px;
+  height:8px;
+  background:#fff;
+  border-radius:0 2px 2px 0;
+}
+
+.bat-fill {
+  height:100%;
+  background:var(--energy);
+  width:50%;
+  transition:width 1s ease;
+}
+
+.state-day .bat-fill {
+  width:100%;
+  animation:chargeAnim 2s infinite alternate;
+}
+
+.state-night .bat-fill {
+  width:40%;
+  background:var(--amber);
+}
+
+@keyframes chargeAnim {
+  0% {
+    opacity:0.7;
+  }
+
+  100% {
+    opacity:1;
+  }
+}
+
+
+/* Energy Flow */
+
+.energy-svg {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  pointer-events:none;
+}
+
+.flow-line {
+  fill:none;
+  stroke:rgba(255,255,255,0.1);
+  stroke-width:4;
+  stroke-linecap:round;
+}
+
+.flow-particles {
+  fill:none;
+  stroke:var(--energy);
+  stroke-width:4;
+  stroke-dasharray:10 20;
+  stroke-linecap:round;
+  animation:flowMove 1s linear infinite;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+
+@keyframes flowMove {
+  to {
+    stroke-dashoffset:-30;
+  }
+}
+
+.state-day .flow-p-in {
+  opacity:1;
+  stroke:var(--energy);
+}
+
+.state-night .flow-p-out {
+  opacity:1;
+  stroke:var(--amber);
+  animation-direction:reverse;
+}
+
+
+/* =====================================================
+   KOMPONEN & SPESIFIKASI
+===================================================== */
+
+.specs-table {
+  width:100%;
+  border-collapse:collapse;
+  background:var(--white);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  margin-top:24px;
+}
+
+.specs-table th {
+  background:var(--night);
+  color:var(--white);
+  padding:14px 20px;
+  text-align:left;
+}
+
+.specs-table td {
+  padding:14px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.specs-table tr:last-child td {
+  border-bottom:none;
+}
+
+.specs-table tr:nth-child(even) {
+  background:var(--sand-2);
+}
+
+
+/* =====================================================
+   CARA KERJA
+===================================================== */
+
+.flow {
+  display:flex;
+  gap:16px;
+  align-items:stretch;
+  overflow-x:auto;
+  padding:10px 4px 14px;
+}
+
+.flow-step {
+  flex:1 1 220px;
+  min-width:200px;
+  background:var(--night);
+  color:var(--white);
+  padding:26px 20px 22px;
+  position:relative;
+  border-radius:10px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .25s ease;
+}
+
+.flow-step:hover {
+  transform:translateY(-4px);
+}
+
+.flow-step .step-badge {
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--amber);
+  color:var(--night);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+.flow-step h4 {
+  color:var(--white);
+  margin-bottom:8px;
+}
+
+.flow-step p {
+  font-size:14px;
+  color:rgba(255,255,255,0.72);
+}
+
+
+/* =====================================================
+   KOMPONEN KARTU
+===================================================== */
+
+.comp-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.comp-card {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:20px;
+  transition:0.3s;
+}
+
+.comp-card:hover {
+  border-color:var(--amber);
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-lift);
+}
+
+.icon-wrap {
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  margin-bottom:14px;
+  background:var(--sand-2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+/* =====================================================
+   MAINTENANCE
+===================================================== */
+
+.maintenance-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.maintenance-card {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:24px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.maintenance-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-lift);
+}
+
+.maintenance-icon {
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:var(--sand-2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  margin-bottom:16px;
+}
+
+.maintenance-card h3 {
+  font-size:20px;
+  margin-bottom:8px;
+}
+
+.maintenance-card p {
+  color:var(--ink-soft);
+  font-size:14.5px;
+  margin-bottom:14px;
+}
+
+.maintenance-list {
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.maintenance-list li {
+  position:relative;
+  padding-left:24px;
+  font-size:14px;
+  color:var(--ink-soft);
+}
+
+.maintenance-list li::before {
+  content:"✓";
+  position:absolute;
+  left:0;
+  top:0;
+  color:var(--moss);
+  font-weight:700;
+}
+
+.maintenance-schedule {
+  margin-top:30px;
+  background:var(--night);
+  color:var(--white);
+  border-radius:14px;
+  padding:26px;
+}
+
+.maintenance-schedule h3 {
+  color:var(--white);
+  margin-bottom:18px;
+}
+
+.schedule-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.schedule-item {
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+  padding:18px;
+}
+
+.schedule-item strong {
+  display:block;
+  color:var(--amber-soft);
+  margin-bottom:6px;
+}
+
+.schedule-item span {
+  font-size:13.5px;
+  color:rgba(255,255,255,0.72);
+}
+
+
+/* =====================================================
+   DOKUMENTASI
+===================================================== */
+
+.doc-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+
+.doc-card {
+  aspect-ratio:4/3;
+  background:var(--sand-2);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  border:1px solid var(--line);
+  color:var(--ink-soft);
+  font-weight:500;
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow-soft);
+  transition:transform 0.3s ease;
+}
+
+.doc-card:hover {
+  transform:translateY(-4px);
+}
+
+.doc-card img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.5s ease;
+}
+
+.doc-card:hover img {
+  transform:scale(1.1);
+}
+
+.doc-card .doc-overlay {
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:linear-gradient(
+    0deg,
+    rgba(27,42,65,0.9) 0%,
+    transparent 100%
+  );
+  color:var(--white);
+  padding:30px 16px 12px;
+  font-size:14.5px;
+  display:flex;
+  align-items:flex-end;
+  font-weight:600;
+}
+
+
+/* =====================================================
+   EXHIBITION MODE
+===================================================== */
+
+.fab-exhibition {
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  z-index:100;
+  background:var(--night);
+  color:var(--amber-soft);
+  border:2px solid var(--amber);
+  padding:14px 24px;
+  border-radius:999px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  transition:0.3s;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.fab-exhibition:hover {
+  background:var(--amber);
+  color:var(--night);
+  transform:scale(1.05);
+}
+
+
+/* Saat Mode Pameran Aktif */
+
+body.exhibition-active nav.topnav {
+  transform:translateY(-100%);
+}
+
+body.exhibition-active {
+  padding-top:0;
+}
+
+body.exhibition-active section:not(#simulasi) {
+  display:none;
+}
+
+body.exhibition-active #simulasi {
+  padding:5vh 0;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  background:var(--night-2);
+}
+
+body.exhibition-active .sim-container {
+  transform:scale(1.1);
+  margin:auto;
+  border:none;
+  box-shadow:none;
+}
+
+body.exhibition-active footer {
+  display:none;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+  background:var(--night);
+  color:#B9B3A0;
+  padding:38px 0;
+  font-size:13.5px;
+  border-top:3px solid var(--amber);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width:820px) {
+
+  .hero .wrap,
   .prob-sol-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-    background: var(--sand-2); border-radius: 16px; padding: 32px;
+    grid-template-columns:1fr;
   }
-  .card-ps {
-    background: var(--white); padding: 24px; border-radius: 12px;
-    box-shadow: var(--shadow-soft);
-  }
-  .card-ps h3 { margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .card-ps p { color: var(--ink-soft); font-size: 15px; }
 
-  /* ---------- SIMULASI DASHBOARD ---------- */
-  .sim-container {
-    background: var(--night); border-radius: 20px; padding: 32px;
-    color: var(--white); box-shadow: var(--shadow-lift);
-    position: relative; overflow: hidden;
+  .comp-grid {
+    grid-template-columns:repeat(2,1fr);
   }
-  .sim-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px;
+
+  .maintenance-grid,
+  .schedule-grid {
+    grid-template-columns:1fr;
   }
-  .sim-controls {
-    display: flex; gap: 12px; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 99px;
-  }
-  .sim-btn {
-    background: transparent; border: none; color: #fff; padding: 8px 20px;
-    border-radius: 99px; cursor: pointer; font-weight: 600; transition: 0.3s;
-  }
-  .sim-btn.active { background: var(--amber); color: var(--night); }
 
   .sim-flow-area {
-    position: relative; display: flex; justify-content: space-between; align-items: center;
-    padding: 40px 0; max-width: 800px; margin: 0 auto;
-  }
-  
-  .sim-node {
-    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px;
-    width: 140px; text-align: center;
-  }
-  .node-icon {
-    width: 80px; height: 80px; background: var(--night-2); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 36px;
-    border: 3px solid #3A5A55; transition: 0.4s; box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  }
-  .node-label { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--amber-soft); font-weight: 600; }
-  .node-status { font-size: 14px; font-weight: bold; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 6px; }
-  
-  /* Panel Surya State */
-  .state-day .node-panel .node-icon { border-color: var(--amber); box-shadow: 0 0 25px rgba(232,163,61,0.4); }
-  .state-day .node-panel .node-status { color: var(--amber); }
-  .state-night .node-panel .node-icon { filter: grayscale(1); border-color: #555; }
-  
-  /* Lampu State */
-  .state-night .node-lamp .node-icon { border-color: var(--amber); background: #FFF9D2; box-shadow: 0 0 40px rgba(232,163,61,0.6); }
-  .state-night .node-lamp .node-status { color: var(--amber); }
-
-  /* Baterai Level */
-  .bat-level { width: 40px; height: 20px; background: #333; border-radius: 4px; border: 2px solid #fff; position: relative; display: inline-block; margin-top: 4px; }
-  .bat-level::after { content:''; position:absolute; right:-4px; top:4px; width:2px; height:8px; background:#fff; border-radius:0 2px 2px 0;}
-  .bat-fill { height: 100%; background: var(--energy); width: 50%; transition: width 1s ease; }
-  .state-day .bat-fill { width: 100%; animation: chargeAnim 2s infinite alternate; }
-  .state-night .bat-fill { width: 40%; background: var(--amber); }
-  @keyframes chargeAnim { 0% { opacity: 0.7; } 100% { opacity: 1; } }
-
-  /* Energy Flow Lines (SVG) */
-  .energy-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-  .flow-line { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 4; stroke-linecap: round; }
-  .flow-particles { 
-    fill: none; stroke: var(--energy); stroke-width: 4; stroke-dasharray: 10 20; 
-    stroke-linecap: round; animation: flowMove 1s linear infinite; opacity: 0; transition: opacity 0.3s;
-  }
-  @keyframes flowMove { to { stroke-dashoffset: -30; } }
-  
-  .state-day .flow-p-in { opacity: 1; stroke: var(--energy); }
-  .state-night .flow-p-out { opacity: 1; stroke: var(--amber); animation-direction: reverse;}
-
-  /* ---------- KOMPONEN & SPESIFIKASI ---------- */
-  .specs-table {
-    width: 100%; border-collapse: collapse; background: var(--white);
-    border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-soft);
-    margin-top: 24px;
-  }
-  .specs-table th { background: var(--night); color: var(--white); padding: 14px 20px; text-align: left; }
-  .specs-table td { padding: 14px 20px; border-bottom: 1px solid var(--line); }
-  .specs-table tr:last-child td { border-bottom: none; }
-  .specs-table tr:nth-child(even) { background: var(--sand-2); }
-
-  /* ---------- DOKUMENTASI ---------- */
-  .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .doc-card { 
-    aspect-ratio: 4/3; background: var(--sand-2); border-radius: 12px; 
-    display: flex; align-items: center; justify-content: center; flex-direction: column;
-    border: 1px solid var(--line); color: var(--ink-soft); font-weight: 500;
-    overflow: hidden; position: relative;
-    box-shadow: var(--shadow-soft); transition: transform 0.3s ease;
-  }
-  .doc-card:hover { transform: translateY(-4px); }
-  .doc-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-  .doc-card:hover img { transform: scale(1.1); }
-  .doc-card .doc-overlay {
-    position: absolute; bottom: 0; left: 0; width: 100%;
-    background: linear-gradient(0deg, rgba(27,42,65,0.9) 0%, transparent 100%);
-    color: var(--white); padding: 30px 16px 12px; font-size: 14.5px;
-    display: flex; align-items: flex-end; font-weight: 600;
+    flex-direction:column;
+    gap:40px;
   }
 
-  /* ---------- CARA KERJA & MANFAAT ---------- */
-  .flow{display:flex;gap:16px;align-items:stretch;overflow-x:auto;padding:10px 4px 14px;}
-  .flow-step{
-    flex:1 1 220px;min-width:200px;background:var(--night);color:var(--white);
-    padding:26px 20px 22px;position:relative;border-radius:10px;
-    box-shadow:var(--shadow-soft);transition:transform .25s ease;
-  }
-  .flow-step:hover{transform:translateY(-4px);}
-  .flow-step .step-badge{
-    width:30px;height:30px;border-radius:50%;background:var(--amber);color:var(--night);
-    display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;
-    font-size:13px;font-weight:600;margin-bottom:14px;
+  .energy-svg {
+    display:none;
   }
 
-  /* ---------- KOMPONEN KARTU ---------- */
-  .comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
-  .comp-card{
-    background:var(--white);border:1px solid var(--line);border-radius:10px;
-    padding:20px; transition: 0.3s;
+  .sim-node:not(:last-child)::after {
+    content:"↓";
+    font-size:24px;
+    color:var(--amber-soft);
+    position:absolute;
+    bottom:-35px;
   }
-  .comp-card:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:var(--shadow-lift);}
-  .icon-wrap{ width:42px;height:42px;border-radius:10px;margin-bottom:14px;background:var(--sand-2);display:flex;align-items:center;justify-content:center; }
-  .icon-wrap svg{width:22px;height:22px;color:var(--clay);}
 
-  /* ---------- EXHIBITION MODE (FAB) ---------- */
+  .sim-header {
+    flex-direction:column;
+    gap:20px;
+    align-items:flex-start;
+  }
+
+  .sim-controls {
+    width:100%;
+  }
+
+  .sim-btn {
+    flex:1;
+  }
+
+}
+
+@media (max-width:560px) {
+
+  .wrap {
+    padding:0 18px;
+  }
+
+  .topnav .wrap {
+    padding:12px 18px;
+  }
+
+  .brand {
+    font-size:15px;
+  }
+
+  .tabs a {
+    font-size:13px;
+    padding:7px 11px;
+  }
+
+  header.hero {
+    padding-top:45px;
+  }
+
+  main section {
+    padding:55px 0;
+  }
+
+  .prob-sol-grid {
+    padding:18px;
+  }
+
+  .comp-grid {
+    grid-template-columns:1fr;
+  }
+
+  .sim-container {
+    padding:22px 16px;
+  }
+
   .fab-exhibition {
-    position: fixed; bottom: 30px; right: 30px; z-index: 100;
-    background: var(--night); color: var(--amber-soft); border: 2px solid var(--amber);
-    padding: 14px 24px; border-radius: 999px; font-weight: bold; cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: 0.3s;
-    display: flex; align-items: center; gap: 8px;
+    bottom:18px;
+    right:18px;
+    padding:12px 18px;
+    font-size:13px;
   }
-  .fab-exhibition:hover { background: var(--amber); color: var(--night); transform: scale(1.05); }
-  
-  /* Saat Mode Pameran Aktif */
-  body.exhibition-active nav.topnav { transform: translateY(-100%); }
-  body.exhibition-active { padding-top: 0; }
-  body.exhibition-active section:not(#simulasi) { display: none; }
-  body.exhibition-active #simulasi { padding: 5vh 0; height: 100vh; display: flex; align-items: center; background: var(--night-2); }
-  body.exhibition-active .sim-container { transform: scale(1.1); margin: auto; border: none; box-shadow: none; }
-  body.exhibition-active footer { display: none; }
 
-  footer{ background:var(--night);color:#B9B3A0;padding:38px 0;font-size:13.5px; border-top: 3px solid var(--amber); }
-
-  @media (max-width:820px){
-    .hero .wrap, .prob-sol-grid {grid-template-columns:1fr;}
-    .comp-grid{grid-template-columns:repeat(2,1fr);}
-    .sim-flow-area { flex-direction: column; gap: 40px; }
-    .energy-svg { display: none; }
-    .sim-node:not(:last-child)::after {
-      content: "↓";
-      font-size: 24px;
-      color: var(--amber-soft);
-      position: absolute;
-      bottom: -35px;
-    }
+  .specs-table {
+    font-size:13px;
   }
+
+  .specs-table th,
+  .specs-table td {
+    padding:11px 10px;
+  }
+
+}
+
+
+/* =====================================================
+   END CSS
+===================================================== */
+
 </style>
 </head>
+
+
 <body>
 
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
 <nav class="topnav">
+
   <div class="wrap">
-    <div class="brand"><span class="dot"></span>PROGRAM KERJA BIDANG IT</div>
-    <div class="tabs" id="tabs">
-      <a href="#simulasi">Simulasi</a>
-      <a href="#komponen">Komponen</a>
-      <a href="#spesifikasi">Spesifikasi</a>
-      <a href="#dokumentasi">Dokumentasi</a>
+
+    <div class="brand">
+      <span class="dot"></span>
+      PROGRAM KERJA BIDANG IT
     </div>
+
+    <div class="tabs" id="tabs">
+
+      <a href="#simulasi">
+        Simulasi
+      </a>
+
+      <a href="#komponen">
+        Komponen
+      </a>
+
+      <a href="#spesifikasi">
+        Spesifikasi
+      </a>
+
+      <a href="#maintenance">
+        Maintenance
+      </a>
+
+      <a href="#dokumentasi">
+        Dokumentasi
+      </a>
+
+    </div>
+
   </div>
+
 </nav>
 
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <header class="hero">
+
   <div class="wrap">
+
     <div>
-      <div class="hero-label">Panduan Pemakaian Lampu Otomatis Berbasis Panel Surya</div>
-      <h1>Lampu Otomatis Tenaga Surya</h1>
-      <p class="lede">Solusi penerangan mandiri berbasis energi matahari untuk fasilitas lingkungan desa. Representasi digital dari perangkat asli yang telah diimplementasikan.</p>
-      <a href="#simulasi" class="btn-primary">▶ Mulai Simulasi</a>
+
+      <div class="hero-label">
+        Panduan Pemakaian Lampu Otomatis Berbasis Panel Surya
+      </div>
+
+      <h1>
+        Lampu Otomatis Tenaga Surya
+      </h1>
+
+      <p class="lede">
+        Solusi penerangan mandiri berbasis energi matahari untuk
+        fasilitas lingkungan desa. Representasi digital dari
+        perangkat asli yang telah diimplementasikan.
+      </p>
+
+      <a href="#simulasi" class="btn-primary">
+        ▶ Mulai Simulasi
+      </a>
+
     </div>
+
   </div>
-  <svg class="hero-wave" viewBox="0 0 1080 44" preserveAspectRatio="none">
-    <path d="M0,22 C120,4 240,40 360,26 C480,12 600,38 720,24 C840,10 960,36 1080,20 L1080,44 L0,44 Z" fill="#F1ECDD"/>
+
+
+  <svg
+    class="hero-wave"
+    viewBox="0 0 1080 44"
+    preserveAspectRatio="none"
+  >
+
+    <path
+      d="M0,22 C120,4 240,40 360,26 C480,12 600,38 720,24 C840,10 960,36 1080,20 L1080,44 L0,44 Z"
+      fill="#F1ECDD"
+    />
+
   </svg>
+
 </header>
 
+
+
 <main>
-  
-  <section id="permasalahan">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="accent-rule"></div>
-        <h2>Latar Belakang Program</h2>
-        <p>Mengapa perangkat ini dibuat dan diimplementasikan di Desa Pojokrejo.</p>
-      </div>
-      <div class="prob-sol-grid">
-        <div class="card-ps">
-          <h3>⚠️ Permasalahan</h3>
-          <p>Fasilitas desa membutuhkan penerangan ketika kondisi mulai gelap, sementara penggunaan listrik PLN secara terus-menerus membebani biaya bulanan desa dan kurang praktis dalam pengoperasian manual setiap hari.</p>
-        </div>
-        <div class="card-ps">
-          <h3>💡 Solusi yang Diterapkan</h3>
-          <p>Penerangan mandiri menggunakan energi matahari yang tersimpan dalam baterai (Off-grid). Lampu beroperasi secara otomatis mengikuti cahaya matahari tanpa perlu saklar manual, memberikan efisiensi energi yang maksimal.</p>
-        </div>
-      </div>
+
+
+<!-- =====================================================
+     LATAR BELAKANG
+===================================================== -->
+
+<section id="permasalahan">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div class="accent-rule"></div>
+
+      <h2>
+        Latar Belakang Program
+      </h2>
+
+      <p>
+        Mengapa perangkat ini dibuat dan diimplementasikan
+        di Desa Pojokrejo.
+      </p>
+
     </div>
-  </section>
 
-  <!-- BAGIAN UTAMA: SIMULASI DIGITAL TWIN -->
-  <section id="simulasi">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="accent-rule"></div>
-        <h2>Simulasi Sistem</h2>
-        <p>Alat fisik tidak tersedia di lokasi? Coba simulasi interaktif aliran energi dari perangkat secara langsung di bawah ini.</p>
+
+    <div class="prob-sol-grid">
+
+
+      <div class="card-ps">
+
+        <h3>
+          ⚠️ Permasalahan
+        </h3>
+
+        <p>
+          Fasilitas desa membutuhkan penerangan ketika kondisi
+          mulai gelap, sementara penggunaan listrik PLN secara
+          terus-menerus membebani biaya bulanan desa dan kurang
+          praktis dalam pengoperasian manual setiap hari.
+        </p>
+
       </div>
 
-      <div class="sim-container state-day" id="sim-dashboard">
-        <div class="sim-header">
-          <div>
-            <h3 style="color:var(--white);">Monitoring Digital</h3>
-            <p style="color:rgba(255,255,255,0.6); font-size: 14px;">Status: <span id="sim-text-status">Mengisi Daya (Charging)</span></p>
-          </div>
-          <div class="sim-controls">
-            <button class="sim-btn active" id="btn-day">☀️ SIANG</button>
-            <button class="sim-btn" id="btn-night">🌙 MALAM</button>
-          </div>
+
+      <div class="card-ps">
+
+        <h3>
+          💡 Solusi yang Diterapkan
+        </h3>
+
+        <p>
+          Penerangan mandiri menggunakan energi matahari yang
+          tersimpan dalam baterai (Off-grid). Lampu beroperasi
+          secara otomatis mengikuti cahaya matahari tanpa perlu
+          saklar manual, memberikan efisiensi energi yang maksimal.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SIMULASI DIGITAL TWIN
+===================================================== -->
+
+<section id="simulasi">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div class="accent-rule"></div>
+
+      <h2>
+        Simulasi Sistem
+      </h2>
+
+      <p>
+        Alat fisik tidak tersedia di lokasi? Coba simulasi
+        interaktif aliran energi dari perangkat secara langsung
+        di bawah ini.
+      </p>
+
+    </div>
+
+
+    <div
+      class="sim-container state-day"
+      id="sim-dashboard"
+    >
+
+
+      <div class="sim-header">
+
+        <div>
+
+          <h3 style="color:var(--white);">
+            Monitoring Digital
+          </h3>
+
+          <p style="color:rgba(255,255,255,0.6);font-size:14px;">
+
+            Status:
+
+            <span id="sim-text-status">
+              Mengisi Daya (Charging)
+            </span>
+
+          </p>
+
         </div>
 
-        <div class="sim-flow-area">
-          <!-- SVG Background untuk garis -->
-          <svg class="energy-svg" viewBox="0 0 800 200" preserveAspectRatio="none">
-            <!-- Line Panel ke SCC -->
-            <path class="flow-line" d="M 140 100 L 360 100" />
-            <path class="flow-particles flow-p-in" d="M 140 100 L 360 100" />
-            
-            <!-- Line SCC ke Baterai -->
-            <path class="flow-line" d="M 440 100 L 660 100" />
-            <path class="flow-particles flow-p-in" d="M 440 100 L 660 100" />
-            
-            <!-- Line SCC ke Lampu (Bawah) -->
-            <path class="flow-line" d="M 400 140 L 400 200 L 660 200 L 660 140" />
-            <path class="flow-particles flow-p-out" d="M 400 140 L 400 200 L 660 200 L 660 140" />
-          </svg>
 
-          <!-- Node Panel -->
-          <div class="sim-node node-panel">
-            <div class="node-label">PANEL 20Wp</div>
-            <div class="node-icon">☀️</div>
-            <div class="node-status" id="stat-panel">ON (Menyerap)</div>
+        <div class="sim-controls">
+
+          <button
+            class="sim-btn active"
+            id="btn-day"
+          >
+            ☀️ SIANG
+          </button>
+
+          <button
+            class="sim-btn"
+            id="btn-night"
+          >
+            🌙 MALAM
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="sim-flow-area">
+
+
+        <!-- SVG ENERGY FLOW -->
+
+        <svg
+          class="energy-svg"
+          viewBox="0 0 800 200"
+          preserveAspectRatio="none"
+        >
+
+          <path
+            class="flow-line"
+            d="M 140 100 L 360 100"
+          />
+
+          <path
+            class="flow-particles flow-p-in"
+            d="M 140 100 L 360 100"
+          />
+
+
+          <path
+            class="flow-line"
+            d="M 440 100 L 660 100"
+          />
+
+          <path
+            class="flow-particles flow-p-in"
+            d="M 440 100 L 660 100"
+          />
+
+
+          <path
+            class="flow-line"
+            d="M 400 140 L 400 200 L 660 200 L 660 140"
+          />
+
+          <path
+            class="flow-particles flow-p-out"
+            d="M 400 140 L 400 200 L 660 200 L 660 140"
+          />
+
+        </svg>
+
+
+
+        <!-- PANEL -->
+
+        <div class="sim-node node-panel">
+
+          <div class="node-label">
+            PANEL 20Wp
           </div>
 
-          <!-- Node SCC -->
-          <div class="sim-node node-scc">
-            <div class="node-label">CONTROLLER</div>
-            <div class="node-icon">🎛️</div>
-            <div class="node-status" id="stat-scc">Charging</div>
+          <div class="node-icon">
+            ☀️
           </div>
 
-          <!-- Node Baterai & Lampu -->
-          <div style="display: flex; flex-direction: column; gap: 40px; z-index: 2;">
-            <div class="sim-node node-bat">
-              <div class="node-label">BATERAI 12V</div>
-              <div class="node-icon" style="font-size:28px;">
-                <div class="bat-level"><div class="bat-fill"></div></div>
+          <div
+            class="node-status"
+            id="stat-panel"
+          >
+            ON (Menyerap)
+          </div>
+
+        </div>
+
+
+
+        <!-- SCC -->
+
+        <div class="sim-node node-scc">
+
+          <div class="node-label">
+            CONTROLLER
+          </div>
+
+          <div class="node-icon">
+            🎛️
+          </div>
+
+          <div
+            class="node-status"
+            id="stat-scc"
+          >
+            Charging
+          </div>
+
+        </div>
+
+
+
+        <!-- BATTERY + LAMP -->
+
+        <div
+          style="
+            display:flex;
+            flex-direction:column;
+            gap:40px;
+            z-index:2;
+          "
+        >
+
+          <!-- BATTERY -->
+
+          <div class="sim-node node-bat">
+
+            <div class="node-label">
+              BATERAI 12V
+            </div>
+
+            <div
+              class="node-icon"
+              style="font-size:28px;"
+            >
+
+              <div class="bat-level">
+
+                <div class="bat-fill"></div>
+
               </div>
-              <div class="node-status" id="stat-bat">12.1V (Naik)</div>
+
             </div>
-            
-            <div class="sim-node node-lamp">
-              <div class="node-label">LAMPU LED</div>
-              <div class="node-icon">💡</div>
-              <div class="node-status" id="stat-lamp">OFF</div>
+
+            <div
+              class="node-status"
+              id="stat-bat"
+            >
+              12.1V (Naik)
             </div>
+
+          </div>
+
+
+          <!-- LAMP -->
+
+          <div class="sim-node node-lamp">
+
+            <div class="node-label">
+              LAMPU LED
+            </div>
+
+            <div class="node-icon">
+              💡
+            </div>
+
+            <div
+              class="node-status"
+              id="stat-lamp"
+            >
+              OFF
+            </div>
+
           </div>
 
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="komponen">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="accent-rule"></div>
-        <h2>Komponen & Cara Kerja</h2>
-      </div>
-      
-      <div class="flow" style="margin-bottom: 40px;">
-        <div class="flow-step"><span class="step-badge">1</span><h4>Menyerap</h4><p>Panel surya menangkap cahaya (DC).</p></div>
-        <div class="flow-step"><span class="step-badge">2</span><h4>Mengontrol</h4><p>SCC mengatur arus agar aki aman.</p></div>
-        <div class="flow-step"><span class="step-badge">3</span><h4>Mendeteksi</h4><p>Panel berhenti = Tanda malam tiba.</p></div>
-        <div class="flow-step"><span class="step-badge">4</span><h4>Menyala</h4><p>Daya baterai dialirkan ke lampu.</p></div>
+
       </div>
 
-      <div class="comp-grid">
-        <div class="comp-card">
-          <div class="icon-wrap">☀️</div>
-          <h4>Panel Surya</h4>
-          <p style="font-size: 13px; color: var(--ink-soft); margin-top: 8px;">Menangkap cahaya matahari dan mengubahnya jadi listrik.</p>
-        </div>
-        <div class="comp-card">
-          <div class="icon-wrap">🎛️</div>
-          <h4>Controller (SCC)</h4>
-          <p style="font-size: 13px; color: var(--ink-soft); margin-top: 8px;">Mendeteksi siang/malam dan mencegah overcharge baterai.</p>
-        </div>
-        <div class="comp-card">
-          <div class="icon-wrap">🔋</div>
-          <h4>Baterai Aki</h4>
-          <p style="font-size: 13px; color: var(--ink-soft); margin-top: 8px;">Menyimpan energi di siang hari untuk dipakai malam hari.</p>
-        </div>
-        <div class="comp-card">
-          <div class="icon-wrap">💡</div>
-          <h4>Lampu LED</h4>
-          <p style="font-size: 13px; color: var(--ink-soft); margin-top: 8px;">Pencahayaan hemat daya yang menyala otomatis.</p>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <section id="spesifikasi">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="accent-rule"></div>
-        <h2>Spesifikasi Teknis</h2>
-        <p>Data spesifikasi perangkat keras yang dirakit untuk proyek ini.</p>
-      </div>
-      <table class="specs-table">
-        <tr><th>Komponen / Parameter</th><th>Spesifikasi</th></tr>
-        <tr><td><strong>Panel Surya</strong></td><td>Polycrystalline (20 Wp)</td></tr>
-        <tr><td><strong>Kapasitas Baterai</strong></td><td>12 V / 8 Ah (VRLA / Aki Kering)</td></tr>
-        <tr><td><strong>Controller (SCC)</strong></td><td>PWM Solar Charge Controller (10A)</td></tr>
-        <tr><td><strong>Jenis Lampu</strong></td><td>LED DC 12V Hemat Energi</td></tr>
-        <tr><td><strong>Sistem Operasi</strong></td><td>Off-Grid (Berdiri Sendiri)</td></tr>
-        <tr><td><strong>Mode Aktivasi</strong></td><td>Otomatis (Sensor Tegangan Panel)</td></tr>
-      </table>
-    </div>
-  </section>
+  </div>
 
-  <section id="dokumentasi">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="accent-rule"></div>
-        <h2>Dokumentasi Implementasi</h2>
-        <p>Bukti instalasi fisik perangkat yang telah diimplementasikan di lokasi.</p>
-      </div>
-      <div class="doc-grid">
-        <div class="doc-card">
-          <img src="assets/panel.jpeg" alt="Foto Pemasangan Panel">
-          <div class="doc-overlay">Persiapan alat</div>
-        </div>
-        <div class="doc-card">
-          <img src="assets/rakit.jpeg" alt="Foto Perakitan SCC & Aki">
-          <div class="doc-overlay">Perakitan Sistem Kontrol</div>
-        </div>
-        <div class="doc-card">
-          <img src="assets/instalasi.jpeg" alt="Foto Tiang / Instalasi">
-          <div class="doc-overlay">Pemasangan Panel</div>
-        </div>
-        <div class="doc-card">
-          <img src="assets/nyala.jpeg" alt="Foto Lampu Menyala (Malam)">
-          <div class="doc-overlay">Pengujian Malam Hari</div>
-        </div>
-      </div>
+</section>
+
+
+
+<!-- =====================================================
+     KOMPONEN & CARA KERJA
+===================================================== -->
+
+<section id="komponen">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div class="accent-rule"></div>
+
+      <h2>
+        Komponen & Cara Kerja
+      </h2>
+
     </div>
-  </section>
+
+
+    <div
+      class="flow"
+      style="margin-bottom:40px;"
+    >
+
+
+      <div class="flow-step">
+
+        <span class="step-badge">
+          1
+        </span>
+
+        <h4>
+          Menyerap
+        </h4>
+
+        <p>
+          Panel surya menangkap cahaya matahari
+          dan mengubahnya menjadi energi listrik DC.
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-step">
+
+        <span class="step-badge">
+          2
+        </span>
+
+        <h4>
+          Mengontrol
+        </h4>
+
+        <p>
+          SCC mengatur proses pengisian energi
+          menuju baterai.
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-step">
+
+        <span class="step-badge">
+          3
+        </span>
+
+        <h4>
+          Mendeteksi
+        </h4>
+
+        <p>
+          Controller mengenali kondisi siang dan malam
+          berdasarkan tegangan dari panel.
+        </p>
+
+      </div>
+
+
+
+      <div class="flow-step">
+
+        <span class="step-badge">
+          4
+        </span>
+
+        <h4>
+          Menyala
+        </h4>
+
+        <p>
+          Daya baterai dialirkan menuju lampu
+          ketika kondisi malam.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+
+    <div class="comp-grid">
+
+
+      <div class="comp-card">
+
+        <div class="icon-wrap">
+          ☀️
+        </div>
+
+        <h4>
+          Panel Surya
+        </h4>
+
+        <p
+          style="
+            font-size:13px;
+            color:var(--ink-soft);
+            margin-top:8px;
+          "
+        >
+          Menangkap cahaya matahari dan mengubahnya
+          menjadi energi listrik.
+        </p>
+
+      </div>
+
+
+
+      <div class="comp-card">
+
+        <div class="icon-wrap">
+          🎛️
+        </div>
+
+        <h4>
+          Controller (SCC)
+        </h4>
+
+        <p
+          style="
+            font-size:13px;
+            color:var(--ink-soft);
+            margin-top:8px;
+          "
+        >
+          Mengatur pengisian baterai dan mengontrol
+          penggunaan energi menuju lampu.
+        </p>
+
+      </div>
+
+
+
+      <div class="comp-card">
+
+        <div class="icon-wrap">
+          🔋
+        </div>
+
+        <h4>
+          Baterai Aki
+        </h4>
+
+        <p
+          style="
+            font-size:13px;
+            color:var(--ink-soft);
+            margin-top:8px;
+          "
+        >
+          Menyimpan energi pada siang hari untuk
+          digunakan ketika malam hari.
+        </p>
+
+      </div>
+
+
+
+      <div class="comp-card">
+
+        <div class="icon-wrap">
+          💡
+        </div>
+
+        <h4>
+          Lampu LED
+        </h4>
+
+        <p
+          style="
+            font-size:13px;
+            color:var(--ink-soft);
+            margin-top:8px;
+          "
+        >
+          Menghasilkan penerangan dengan konsumsi
+          daya yang relatif rendah.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SPESIFIKASI
+===================================================== -->
+
+<section id="spesifikasi">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div class="accent-rule"></div>
+
+      <h2>
+        Spesifikasi Teknis
+      </h2>
+
+      <p>
+        Data spesifikasi perangkat keras yang dirakit
+        untuk proyek ini.
+      </p>
+
+    </div>
+
+
+    <table class="specs-table">
+
+      <tr>
+
+        <th>
+          Komponen / Parameter
+        </th>
+
+        <th>
+          Spesifikasi
+        </th>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <strong>
+            Panel Surya
+          </strong>
+        </td>
+
+        <td>
+          Polycrystalline (20 Wp)
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <strong>
+            Kapasitas Baterai
+          </strong>
+        </td>
+
+        <td>
+          12 V / 8 Ah (VRLA / Aki Kering)
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <strong>
+            Controller (SCC)
+          </strong>
+        </td>
+
+        <td>
+          PWM Solar Charge Controller (10A)
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <strong>
+            Jenis Lampu
+          </strong>
+        </td>
+
+        <td>
+          LED DC 12V Hemat Energi
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <strong>
+            Sistem Operasi
+          </strong>
+        </td>
+
+        <td>
+          Off-Grid (Berdiri Sendiri)
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <strong>
+            Mode Aktivasi
+          </strong>
+        </td>
+
+        <td>
+          Otomatis berdasarkan kondisi cahaya/
+          tegangan panel
+        </td>
+
+      </tr>
+
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAINTENANCE
+===================================================== -->
+
+<section id="maintenance">
+
+  <div class="wrap">
+
+
+    <div class="section-head">
+
+      <div class="accent-rule"></div>
+
+      <h2>
+        Panduan Maintenance
+      </h2>
+
+      <p>
+        Perawatan sederhana untuk menjaga sistem lampu
+        tenaga surya tetap aman, bersih, dan berfungsi
+        dengan baik.
+      </p>
+
+    </div>
+
+
+
+    <div class="maintenance-grid">
+
+
+      <!-- PANEL SURYA -->
+
+      <div class="maintenance-card">
+
+        <div class="maintenance-icon">
+          ☀️
+        </div>
+
+        <h3>
+          Panel Surya
+        </h3>
+
+        <p>
+          Panel harus mendapatkan cahaya matahari
+          yang cukup agar proses pengisian baterai
+          berjalan optimal.
+        </p>
+
+        <ul class="maintenance-list">
+
+          <li>
+            Bersihkan permukaan panel dari debu
+            dan kotoran.
+          </li>
+
+          <li>
+            Periksa apakah panel tertutup bayangan,
+            daun, atau benda lain.
+          </li>
+
+          <li>
+            Pastikan posisi panel tetap kokoh
+            dan mengarah ke sumber cahaya.
+          </li>
+
+          <li>
+            Periksa kabel dan konektor dari
+            kerusakan atau kelonggaran.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- SCC -->
+
+      <div class="maintenance-card">
+
+        <div class="maintenance-icon">
+          🎛️
+        </div>
+
+        <h3>
+          Solar Charge Controller
+        </h3>
+
+        <p>
+          Controller berfungsi mengatur proses
+          pengisian dan penggunaan energi dari baterai.
+        </p>
+
+        <ul class="maintenance-list">
+
+          <li>
+            Periksa indikator status pada controller.
+          </li>
+
+          <li>
+            Pastikan kabel terminal terpasang dengan kuat.
+          </li>
+
+          <li>
+            Jaga controller tetap kering dan terlindung
+            dari air.
+          </li>
+
+          <li>
+            Periksa apakah terdapat panas berlebihan
+            pada controller.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- BATERAI -->
+
+      <div class="maintenance-card">
+
+        <div class="maintenance-icon">
+          🔋
+        </div>
+
+        <h3>
+          Baterai
+        </h3>
+
+        <p>
+          Baterai menyimpan energi yang dihasilkan
+          panel untuk digunakan ketika malam atau
+          kondisi tanpa cahaya matahari.
+        </p>
+
+        <ul class="maintenance-list">
+
+          <li>
+            Periksa kondisi fisik baterai secara berkala.
+          </li>
+
+          <li>
+            Pastikan terminal baterai tidak longgar
+            atau berkarat.
+          </li>
+
+          <li>
+            Jaga baterai dari air dan kelembapan
+            berlebihan.
+          </li>
+
+          <li>
+            Perhatikan apabila baterai cepat habis
+            atau tidak terisi dengan baik.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- LAMPU -->
+
+      <div class="maintenance-card">
+
+        <div class="maintenance-icon">
+          💡
+        </div>
+
+        <h3>
+          Lampu LED
+        </h3>
+
+        <p>
+          Lampu menggunakan energi dari baterai dan
+          bekerja otomatis ketika kondisi mulai gelap.
+        </p>
+
+        <ul class="maintenance-list">
+
+          <li>
+            Bersihkan bagian lampu dari debu
+            secara berkala.
+          </li>
+
+          <li>
+            Periksa kabel menuju lampu.
+          </li>
+
+          <li>
+            Pastikan lampu menyala ketika malam hari.
+          </li>
+
+          <li>
+            Jika lampu tidak menyala, periksa
+            controller dan baterai.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         JADWAL MAINTENANCE
+    ================================================= -->
+
+    <div class="maintenance-schedule">
+
+      <h3>
+        Jadwal Pemeriksaan
+      </h3>
+
+
+      <div class="schedule-grid">
+
+
+        <div class="schedule-item">
+
+          <strong>
+            Harian
+          </strong>
+
+          <span>
+            Pastikan lampu menyala pada malam hari
+            dan mati ketika kondisi terang.
+          </span>
+
+        </div>
+
+
+
+        <div class="schedule-item">
+
+          <strong>
+            Mingguan
+          </strong>
+
+          <span>
+            Periksa kebersihan panel, kondisi kabel,
+            lampu, dan indikator controller.
+          </span>
+
+        </div>
+
+
+
+        <div class="schedule-item">
+
+          <strong>
+            Bulanan
+          </strong>
+
+          <span>
+            Lakukan pemeriksaan menyeluruh pada panel,
+            SCC, baterai, konektor, dan tiang instalasi.
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DOKUMENTASI
+===================================================== -->
+
+<section id="dokumentasi">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <div class="accent-rule"></div>
+
+      <h2>
+        Dokumentasi Implementasi
+      </h2>
+
+      <p>
+        Bukti instalasi fisik perangkat yang telah
+        diimplementasikan di lokasi.
+      </p>
+
+    </div>
+
+
+
+    <div class="doc-grid">
+
+
+      <div class="doc-card">
+
+        <img
+          src="assets/panel.jpeg"
+          alt="Foto Pemasangan Panel"
+        >
+
+        <div class="doc-overlay">
+          Persiapan alat
+        </div>
+
+      </div>
+
+
+
+      <div class="doc-card">
+
+        <img
+          src="assets/rakit.jpeg"
+          alt="Foto Perakitan SCC & Aki"
+        >
+
+        <div class="doc-overlay">
+          Perakitan Sistem Kontrol
+        </div>
+
+      </div>
+
+
+
+      <div class="doc-card">
+
+        <img
+          src="assets/instalasi.jpeg"
+          alt="Foto Tiang / Instalasi"
+        >
+
+        <div class="doc-overlay">
+          Pemasangan Panel
+        </div>
+
+      </div>
+
+
+
+      <div class="doc-card">
+
+        <img
+          src="assets/nyala.jpeg"
+          alt="Foto Lampu Menyala (Malam)"
+        >
+
+        <div class="doc-overlay">
+          Pengujian Malam Hari
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
 
 </main>
 
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
-  <div class="wrap">        
-    <div><strong>Produk Pameran KKN Kelompok 22</strong> — Bidang Teknologi Informasi</div>
-    <div>Scan QR Code pada banner untuk membuka simulasi ini di perangkat Anda.</div>
+
+  <div class="wrap">
+
+    <div>
+      <strong>
+        Produk Pameran KKN Kelompok 22
+      </strong>
+
+      — Bidang Teknologi Informasi
+    </div>
+
+    <div>
+      Scan QR Code pada banner untuk membuka
+      simulasi ini di perangkat Anda.
+    </div>
+
   </div>
+
 </footer>
 
-<button class="fab-exhibition" id="btn-exhibit">DEMO SIMULASI</button>
+
+
+<!-- =====================================================
+     EXHIBITION BUTTON
+===================================================== -->
+
+<button
+  class="fab-exhibition"
+  id="btn-exhibit"
+>
+  DEMO SIMULASI
+</button>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
 <script>
-  // --- Simulasi Dashboard Logic ---
-  const simDash = document.getElementById('sim-dashboard');
-  const btnDay = document.getElementById('btn-day');
-  const btnNight = document.getElementById('btn-night');
-  
-  const textStatus = document.getElementById('sim-text-status');
-  const statPanel = document.getElementById('stat-panel');
-  const statScc = document.getElementById('stat-scc');
-  const statBat = document.getElementById('stat-bat');
-  const statLamp = document.getElementById('stat-lamp');
 
-  function setSimMode(mode) {
-    if(mode === 'day') {
-      simDash.classList.remove('state-night');
-      simDash.classList.add('state-day');
-      btnDay.classList.add('active');
-      btnNight.classList.remove('active');
-      
-      textStatus.textContent = "Mengisi Daya (Charging)";
-      statPanel.textContent = "ON (Menyerap)";
-      statScc.textContent = "Charging";
-      statBat.textContent = "12.1V (Naik)";
-      statLamp.textContent = "OFF";
-    } else {
-      simDash.classList.remove('state-day');
-      simDash.classList.add('state-night');
-      btnNight.classList.add('active');
-      btnDay.classList.remove('active');
 
-      textStatus.textContent = "Beroperasi (Discharging)";
-      statPanel.textContent = "OFF (0V)";
-      statScc.textContent = "Discharging";
-      statBat.textContent = "11.8V (Turun)";
-      statLamp.textContent = "ON";
-    }
+/* =====================================================
+   SIMULASI DASHBOARD
+===================================================== */
+
+const simDash =
+  document.getElementById('sim-dashboard');
+
+const btnDay =
+  document.getElementById('btn-day');
+
+const btnNight =
+  document.getElementById('btn-night');
+
+const textStatus =
+  document.getElementById('sim-text-status');
+
+const statPanel =
+  document.getElementById('stat-panel');
+
+const statScc =
+  document.getElementById('stat-scc');
+
+const statBat =
+  document.getElementById('stat-bat');
+
+const statLamp =
+  document.getElementById('stat-lamp');
+
+
+
+function setSimMode(mode) {
+
+
+  if(mode === 'day') {
+
+
+    simDash.classList.remove(
+      'state-night'
+    );
+
+    simDash.classList.add(
+      'state-day'
+    );
+
+
+    btnDay.classList.add(
+      'active'
+    );
+
+    btnNight.classList.remove(
+      'active'
+    );
+
+
+    textStatus.textContent =
+      "Mengisi Daya (Charging)";
+
+
+    statPanel.textContent =
+      "ON (Menyerap)";
+
+
+    statScc.textContent =
+      "Charging";
+
+
+    statBat.textContent =
+      "12.1V (Naik)";
+
+
+    statLamp.textContent =
+      "OFF";
+
+
+  } else {
+
+
+    simDash.classList.remove(
+      'state-day'
+    );
+
+    simDash.classList.add(
+      'state-night'
+    );
+
+
+    btnNight.classList.add(
+      'active'
+    );
+
+    btnDay.classList.remove(
+      'active'
+    );
+
+
+    textStatus.textContent =
+      "Beroperasi (Discharging)";
+
+
+    statPanel.textContent =
+      "OFF (0V)";
+
+
+    statScc.textContent =
+      "Discharging";
+
+
+    statBat.textContent =
+      "11.8V (Turun)";
+
+
+    statLamp.textContent =
+      "ON";
+
   }
 
-  btnDay.addEventListener('click', () => setSimMode('day'));
-  btnNight.addEventListener('click', () => setSimMode('night'));
+}
 
-  // --- Exhibition Mode Logic ---
-  const btnExhibit = document.getElementById('btn-exhibit');
-  let isExhibitMode = false;
-  let autoLoop;
 
-  btnExhibit.addEventListener('click', () => {
-    isExhibitMode = !isExhibitMode;
+
+btnDay.addEventListener(
+  'click',
+  () => setSimMode('day')
+);
+
+btnNight.addEventListener(
+  'click',
+  () => setSimMode('night')
+);
+
+
+
+/* =====================================================
+   EXHIBITION MODE
+===================================================== */
+
+const btnExhibit =
+  document.getElementById('btn-exhibit');
+
+let isExhibitMode = false;
+
+let autoLoop;
+
+
+
+btnExhibit.addEventListener(
+  'click',
+  () => {
+
+
+    isExhibitMode =
+      !isExhibitMode;
+
+
     if(isExhibitMode) {
-      document.body.classList.add('exhibition-active');
-      btnExhibit.innerHTML = 'KELUAR DEMO SIMULASI';
-      if(document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(err => console.log(err));
+
+
+      document.body.classList.add(
+        'exhibition-active'
+      );
+
+
+      btnExhibit.innerHTML =
+        'KELUAR DEMO SIMULASI';
+
+
+
+      /* Fullscreen */
+
+      if(
+        document.documentElement.requestFullscreen
+      ) {
+
+        document.documentElement
+          .requestFullscreen()
+          .catch(
+            err => console.log(err)
+          );
+
       }
-      
-      // Auto looping for exhibition
+
+
+
+      /* Auto looping */
+
       let isDay = true;
-      autoLoop = setInterval(() => {
-        isDay = !isDay;
-        setSimMode(isDay ? 'day' : 'night');
-      }, 5000); // Ganti tiap 5 detik
-      
-      // Auto scroll ke simulasi
-      document.getElementById('simulasi').scrollIntoView();
+
+
+      autoLoop = setInterval(
+        () => {
+
+          isDay = !isDay;
+
+          setSimMode(
+            isDay
+              ? 'day'
+              : 'night'
+          );
+
+        },
+        5000
+      );
+
+
+
+      /* Scroll ke simulasi */
+
+      document
+        .getElementById('simulasi')
+        .scrollIntoView();
+
+
 
     } else {
-      document.body.classList.remove('exhibition-active');
-      btnExhibit.innerHTML = 'DEMO SIMULASI';
-      if(document.exitFullscreen && document.fullscreenElement) {
+
+
+      document.body.classList.remove(
+        'exhibition-active'
+      );
+
+
+      btnExhibit.innerHTML =
+        'DEMO SIMULASI';
+
+
+
+      if(
+        document.exitFullscreen &&
+        document.fullscreenElement
+      ) {
+
         document.exitFullscreen();
+
       }
+
+
       clearInterval(autoLoop);
+
+
       setSimMode('day');
+
     }
-  });
+
+  }
+);
+
+
 </script>
 
 </body>
 </html>
+```
